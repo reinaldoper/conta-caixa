@@ -1,0 +1,32 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "mysql" 
+  url      = env("DATABASE_URL")
+
+}
+
+model Conta {
+  id        Int     @id @default(autoincrement())
+  cpf     String @unique
+  name    String
+  password String
+  email String @unique
+  status Boolean @default(false)
+  createdAt DateTime @default(now())
+  transactions Transaction[]
+}
+
+model Transaction {
+  id         Int       @id @default(autoincrement())
+  accountId  String    // Aqui usamos o mesmo tipo do campo 'cpf' na tabela 'Conta'
+  date       DateTime  @default(now())
+  transactionId String @unique
+  value      Float
+  cashback   Float @default(0)
+  conta      Conta     @relation(fields: [accountId], references: [cpf], onDelete: Cascade)
+}

@@ -1,0 +1,48 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "desafio",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "reset": "npx ts-node dropDatabase.ts && npx prisma migrate dev reset-value && npx prisma generate && npm run dev",
+    "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/index.ts\"",
+    "create": "npx prisma migrate dev create-value && npx prisma generate && npm run dev"
+  },
+  "author": "Reinaldo",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node16": "1.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "16.11",
+    "@types/sinon": "^10.0.16",
+    "@types/supertest": "^2.0.12",
+    "@types/uuid": "^9.0.2",
+    "chai": "^4.3.6",
+    "chai-http": "4.3.0",
+    "cors": "^2.8.5",
+    "jest": "^29.6.2",
+    "nodemon": "^3.0.1",
+    "prisma": "^5.1.0",
+    "sinon": "13.0.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "4.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.0",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mysql2": "^3.5.2",
+    "ts-node": "^10.9.1",
+    "uuid": "^9.0.0"
+  }
+}
