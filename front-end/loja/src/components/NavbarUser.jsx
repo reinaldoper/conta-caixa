@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const NavbarUser = ({ data }) => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
+      <Container style={{ backgroundColor: '#c4c776', borderRadius: '5px'}}>
         <Navbar.Brand href="/">Login - Page</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
