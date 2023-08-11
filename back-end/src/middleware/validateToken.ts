@@ -15,6 +15,7 @@ const { JWT_SECRET } = process.env
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const { authorization: token } = req.headers;
+  
   if (!token) return res.status(statusCodes.UNAUTHORIZED).json({
     "message": 'Token not found',
    });

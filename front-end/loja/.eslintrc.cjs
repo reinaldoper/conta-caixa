@@ -1,4 +1,8 @@
 module.exports = {
+  globals: {
+    "process": "readonly"
+  },
+
   root: true,
   env: { browser: true, es2020: true, "jest": true },
   extends: [

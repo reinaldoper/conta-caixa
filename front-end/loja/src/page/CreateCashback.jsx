@@ -81,7 +81,7 @@ export default function CreateCashback() {
 
 
   return (
-     <>
+    <>
       <NavbarUser data={user.data} />
       <div className="container">
         <div className="d-flex justify-content-center h-100">
@@ -118,7 +118,8 @@ export default function CreateCashback() {
                 </div>
                 <div className="form-group">
                   <button type="button"
-                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center'}}
+                    data-testId='button'
+                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center' }}
                     className="btn btn-success"
                     onClick={handleClick}
                   >

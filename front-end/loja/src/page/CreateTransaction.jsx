@@ -120,7 +120,8 @@ export default function CreateTransaction() {
                 </div>
                 <div className="form-group">
                   <button type="button"
-                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center'}}
+                    data-testId='button'
+                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center' }}
                     className="btn btn-success"
                     onClick={handleClick}
                   >

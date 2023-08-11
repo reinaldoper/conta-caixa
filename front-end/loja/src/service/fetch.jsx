@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch';
 
 
 export const fetchUser = async (options,host) => {

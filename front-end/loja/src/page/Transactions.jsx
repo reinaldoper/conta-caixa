@@ -19,8 +19,9 @@ export default function Transaction() {
   useEffect(() => {
     const getData = async () => {
       const resul = localStorage.getItem('token');
+      /* console.log(resul, 'token'); */
       const { token } = JSON.parse(resul);
-      console.log(token);
+      console.log(resul, token);
       const emails = localStorage.getItem('email');
       const update = {
         email: JSON.parse(emails),
@@ -35,6 +36,7 @@ export default function Transaction() {
       };
       const result = await fetchUser(options, '/get');
       setUser(result);
+      console.log(result.data.cpf);
       const response = {
         method: 'PATCH',
         body: JSON.stringify({ cpf: result.data.cpf }),
@@ -63,7 +65,6 @@ export default function Transaction() {
   if(transaction.length > 0) {
     totalCashbackEmReais += transaction.reduce((total, item) => {
       const cashbackValor = Number(item.value) * Number(item.cashback);
-      console.log(cashbackValor);
       return total + cashbackValor;
     }, 0);
   }

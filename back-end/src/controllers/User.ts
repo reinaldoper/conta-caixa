@@ -56,7 +56,7 @@ class UserController {
     };
 
     const jwtConfig: SignOptions = {
-      expiresIn: '5d',
+      expiresIn: '30d',
       algorithm: 'HS256',
     };
     const token = jwt.sign(userData, secretToken as string, jwtConfig);

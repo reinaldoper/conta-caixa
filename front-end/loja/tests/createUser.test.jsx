@@ -2,65 +2,53 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from "react-router-dom";
 import { credentials } from './mocks/register.mock';
+import { describe } from 'vitest';
+import CreaterUser from '../src/page/CreateUser';
+import { serverPassword } from './mocks/password.mock';
 
-import Login from '../src/page/Login';
-import { vi, describe } from 'vitest'
-import { server } from './mocks/server.mock';
-
-
-beforeAll(() => server.listen({ onUnhandledRequest: 'bypass'}));
-afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
+beforeAll(() => serverPassword.listen({ onUnhandledRequest: 'bypass'}));
+afterAll(() => serverPassword.close());
+afterEach(() => serverPassword.resetHandlers());
 
 
-
-
-
-describe('Login', () => {
-  it('Texting click in the route Create User', () => {
+describe('Register User', async () => {
+  it('should witch in the message alert', async () => {
     render(
       <BrowserRouter>
-        <Login />
+        <CreaterUser />
+      </BrowserRouter>
+    )
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+    fireEvent.click(button);
+    const msg = screen.getByText(/This is an error alert/i);
+    expect(msg).toBeInTheDocument();
+    await waitFor(() => {
+      expect(msg).not.toBeInTheDocument();
+    }, { timeout: 4000 });
+  });
+
+  it('should have register new user witch error email', async () => {
+    render(
+      <BrowserRouter>
+        <CreaterUser />
       </BrowserRouter>
     );
-    const texto = screen.getByText(/Sign In/i);
+    const texto = screen.getByText(/User create/i);
 
     expect(texto).toBeInTheDocument();
-
-    const link = screen.getByText(/create user/i);
-    expect(link).toBeInTheDocument();
-    fireEvent.click(link);
-  });
-  it('Texting click in the message alert', async () => {
-    render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
-    );
-
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
-    fireEvent.click(button);
-    const msg = screen.getByText(/This is an error alert/i);
-    expect(msg).toBeInTheDocument();
-    await waitFor(() => {
-      expect(msg).not.toBeInTheDocument();
-    }, { timeout: 4000 });
-  });
-
-  it('Texting elements inputs email and message error.', async () => {
-    render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
-    );
-
-    const email = screen.getByRole('textbox');
+    const email = screen.getByPlaceholderText(/email/i);
     expect(email).toBeInTheDocument();
     const password = screen.getByPlaceholderText(/password/i);
     expect(password).toBeInTheDocument();
+    const cpf = screen.getByPlaceholderText(/cpf/i);
+    expect(cpf).toBeInTheDocument();
+    const name = screen.getByPlaceholderText(/name/i);
+    expect(name).toBeInTheDocument();
     fireEvent.change(email, { target: { value: 'reinaldoper' } });
     fireEvent.change(password, { target: { value: '123456' } });
+    fireEvent.change(cpf, { target: { value: '123456' } });
+    fireEvent.change(name, { target: { value: 'João Pedro' } });
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
@@ -71,48 +59,57 @@ describe('Login', () => {
     }, { timeout: 4000 });
   });
 
-  it('Texting elements inputs email and password corrects.', async () => {
-
-    vi
-      .fn()
-      .mockImplementationOnce(credentials.validEmail)
-      .mockImplementationOnce(credentials.validPassword)
-
+  it('should have register new user', async () => {
     render(
       <BrowserRouter>
-        <Login />
+        <CreaterUser />
       </BrowserRouter>
     );
+    const texto = screen.getByText(/User create/i);
 
-    const email = screen.getByRole('textbox');
+    expect(texto).toBeInTheDocument();
+    const email = screen.getByPlaceholderText(/email/i);
     expect(email).toBeInTheDocument();
     const password = screen.getByPlaceholderText(/password/i);
     expect(password).toBeInTheDocument();
+    const cpf = screen.getByPlaceholderText(/cpf/i);
+    expect(cpf).toBeInTheDocument();
+    const name = screen.getByPlaceholderText(/name/i);
+    expect(name).toBeInTheDocument();
     fireEvent.change(email, { target: { value: credentials.validEmail } });
-    fireEvent.change(password, { target: { value: credentials.validPassword } });
+    fireEvent.change(password, { target: { value: '123456' } });
+    fireEvent.change(cpf, { target: { value: '123456' } });
+    fireEvent.change(name, { target: { value: 'João Pedro' } });
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
   });
 
-  it('Texting elements inputs email and User not found.', async () => {
-
+  it('should return message "Invalid cpf" in the document body', async () => {
     render(
       <BrowserRouter>
-        <Login url="/users" />
+        <CreaterUser />
       </BrowserRouter>
     );
+    const texto = screen.getByText(/User create/i);
 
-    const email = screen.getByRole('textbox');
+    expect(texto).toBeInTheDocument();
+    const email = screen.getByPlaceholderText(/email/i);
     expect(email).toBeInTheDocument();
     const password = screen.getByPlaceholderText(/password/i);
     expect(password).toBeInTheDocument();
-    fireEvent.change(email, { target: { value: 'joao@gmail.com' } });
-    fireEvent.change(password, { target: { value: credentials.validPassword } });
+    const cpf = screen.getByPlaceholderText(/cpf/i);
+    expect(cpf).toBeInTheDocument();
+    const name = screen.getByPlaceholderText(/name/i);
+    expect(name).toBeInTheDocument();
+    fireEvent.change(email, { target: { value: credentials.validEmail } });
+    fireEvent.change(password, { target: { value: '123456' } });
+    fireEvent.change(cpf, { target: { value: '123456' } });
+    fireEvent.change(name, { target: { value: 'João Pedro' } });
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
-    
+
     await waitFor(() => {
       const msg = screen.queryByText(/This is an error alert —/i);
       expect(msg).toBeInTheDocument()

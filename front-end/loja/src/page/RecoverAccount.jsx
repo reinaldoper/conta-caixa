@@ -86,7 +86,7 @@ export default function RecoverAccount() {
       return false;
     }
   }
-  
+
 
   return (
     <>
@@ -114,7 +114,8 @@ export default function RecoverAccount() {
                 </div>
                 <div className="form-group">
                   <button type="button"
-                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center'}}
+                    data-testId='button-recover'
+                    style={{ marginLeft: '15vh', width: '10vh', height: '5vh', marginTop: '0.5vw', textAlign: 'center' }}
                     className="btn btn-primary"
                     onClick={handleClick}
                   >
