@@ -27,7 +27,7 @@ export const serverGetTransaction = setupServer(...handlers);
 function getResult(cpf) {
   const result = cpf.cpf;
   const usersData = {
-    '005.953.149-13': {
+    '018.550.210-56': {
       date: '06/08/2023 21: 25:03',
       cashback: 0.05,
       value: 123009,

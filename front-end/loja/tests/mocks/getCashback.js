@@ -27,12 +27,12 @@ export const serverGetCashback = setupServer(...handlers);
 function getResult(transactionId) {
   const result = transactionId;
   const usersData = {
-    'eedc46b1-7ef7-4552-a4de-a6f56ec8d2a0': {
+    'bc76a9f1-107b-412d-a9e8-991ac6f8ea8a': {
       date: '06/08/2023 21: 25:03',
       cashback: 0.05,
       value: 123009,
-      transactionId: 'eedc46b1-7ef7-4552-a4de-a6f56ec8d2a0',
-      accountId: '006956249-03'
+      transactionId: 'bc76a9f1-107b-412d-a9e8-991ac6f8ea8a',
+      accountId: '018550210-56'
 },
   };
 

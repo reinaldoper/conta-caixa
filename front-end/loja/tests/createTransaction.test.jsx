@@ -6,6 +6,7 @@ import CreateTransaction from '../src/page/CreateTransaction';
 import { afterEach, describe, expect, test } from 'vitest'
 import { serverCreateTransaction } from './mocks/createTransaction';
 import { serverNavbar } from './mocks/navbar.mock';
+import  {tokenUsed}  from './mocks/token';
 
 
 beforeAll(() => serverNavbar.listen({ onUnhandledRequest: 'bypass' }));
@@ -109,10 +110,11 @@ describe('Transactions create Transaction', () => {
       expect(msg).not.toBeInTheDocument();
     }, { timeout: 4000 });
   })
-  test('should return all transactions ', async () => {
+  test('should return "TransactionId" message" ', async () => {
     const token = {
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJwZWRyb0BlbWFpbC5jb20iLCJpYXQiOjE2OTE3NzI0MTMsImV4cCI6MTY5MjIwNDQxM30.EPfEghH0PXD7z_74T0fOoP0nqOS-iUhIOdfP2AYN39w'
+      token: tokenUsed
     };
+    console.log(tokenUsed, 'token');
     const emails = {
       email: 'pedro@email.com',
     }

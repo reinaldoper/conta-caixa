@@ -6,6 +6,7 @@ import CreateCashback from '../src/page/CreateCashback';
 import { afterEach, describe, expect, test } from 'vitest'
 import { serverGetCashback } from './mocks/getCashback';
 import { serverNavbar } from './mocks/navbar.mock';
+import { tokenUsed } from './mocks/token';
 
 
 beforeAll(() => serverNavbar.listen({ onUnhandledRequest: 'bypass' }));
@@ -24,8 +25,8 @@ describe('Transactions create cashback', () => {
 
   test('should return one message "This is an error alert" ', async () => {
     const token = {
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJwZWRyb0BlbWFpbC5jb20iLCJpYXQiOjE2OTE3NzI0MTMsImV4cCI6MTY5MjIwNDQxM30.EPfEghH0PXD7z_74T0fOoP0nqOS-iUhIOdfP2AYN39w'
-    };
+      token: tokenUsed,
+    }
     const emails = {
       email: 'pedro@email.com',
     }
@@ -64,7 +65,7 @@ describe('Transactions create cashback', () => {
   })
   test('should return one message "Transaction is not exist." ', async () => {
     const token = {
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJwZWRyb0BlbWFpbC5jb20iLCJpYXQiOjE2OTE3NzI0MTMsImV4cCI6MTY5MjIwNDQxM30.EPfEghH0PXD7z_74T0fOoP0nqOS-iUhIOdfP2AYN39w'
+      token: tokenUsed,
     };
     const emails = {
       email: 'pedro@email.com',
@@ -109,9 +110,9 @@ describe('Transactions create cashback', () => {
       expect(msg).not.toBeInTheDocument();
     }, { timeout: 4000 });
   })
-  test('should return all transactions ', async () => {
+  test('should return success add cashback', async () => {
     const token = {
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJwZWRyb0BlbWFpbC5jb20iLCJpYXQiOjE2OTE3NzI0MTMsImV4cCI6MTY5MjIwNDQxM30.EPfEghH0PXD7z_74T0fOoP0nqOS-iUhIOdfP2AYN39w'
+      token: tokenUsed,
     };
     const emails = {
       email: 'pedro@email.com',
@@ -138,7 +139,7 @@ describe('Transactions create cashback', () => {
     expect(id).toBeInTheDocument();
     const cashback = getByPlaceholderText(/cashback/i);
     expect(cashback).toBeInTheDocument();
-    fireEvent.change(id, { target: { value: 'eedc46b1-7ef7-4552-a4de-a6f56ec8d2a0' } });
+    fireEvent.change(id, { target: { value: 'bc76a9f1-107b-412d-a9e8-991ac6f8ea8a' } });
     fireEvent.change(cashback, { target: { value: '1232.5' } });
     const button = getByTestId('button');
     expect(button).toBeInTheDocument();

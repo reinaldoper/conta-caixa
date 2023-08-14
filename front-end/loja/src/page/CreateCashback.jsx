@@ -39,6 +39,7 @@ export default function CreateCashback() {
   const handleClick = async () => {
     const resul = localStorage.getItem('token');
     const { token } = JSON.parse(resul);
+    console.log(transactionId, 'id');
     const update = {
       transactionId,
       cashback,
